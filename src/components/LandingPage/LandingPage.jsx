@@ -49,12 +49,6 @@ const Title = styled.h1`
   text-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 `;
 
-const Paragraph = styled.p`
-  font-size: 20px;
-  color: ${(props) => props.theme.colors.maintext};
-  text-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-`;
-
 const LandingPage = () => {
   return (
     <>
