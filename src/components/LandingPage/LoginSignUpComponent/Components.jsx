@@ -58,6 +58,11 @@ export const Form = styled.form`
   text-align: center;
 `;
 
+export const ErrorMessage = styled.div`
+  color: red;
+  font-size: smaller;
+`;
+
 export const Title = styled.h1`
   font-weight: bold;
   margin: 0;

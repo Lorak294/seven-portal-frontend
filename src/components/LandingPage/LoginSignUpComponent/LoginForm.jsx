@@ -1,93 +1,48 @@
 import React from "react";
-//import { useFormik } from "formik";
+import { useFormik } from "formik";
 import * as Components from "./Components";
-
-// const SubmitButton = styled.button`
-//   //font-family: "Open Sans", sans-serif;
-//   font-family: inherit;
-//   font-size: 16px;
-//   font-weight: bolder;
-//   width: 100%;
-//   padding: 15px;
-
-//   border: 2px solid ${(props) => props.theme.colors.primary};
-//   border-radius: 7px;
-//   border-width: 3px;
-//   color: ${(props) => props.theme.colors.background};
-//   background-color: ${(props) => props.theme.colors.primary};
-
-//   &:hover {
-//     color: ${(props) => props.theme.colors.primary};
-//     background-color: ${(props) => props.theme.colors.secondary};
-//   }
-// `;
-
-// const FormComponent = styled.form`
-//   //box-sizing: border-box;
-//   margin: auto;
-//   //background-color: orange;
-//   text-align: left;
-//   width: 60%;
-//   input {
-//     padding: 10px;
-//     margin-bottom: 15px;
-//     margin-top: 5px;
-//     border: 0;
-//     border-radius: 7px;
-//     width: 100%;
-//     font-family: inherit;
-//     font-size: inherit;
-//     display: inline-block;
-//     box-sizing: border-box;
-//   }
-//   label {
-//     font-weight: bold;
-//   }
-// `;
-
-// const LoginForm = () => {
-//   const formik = useFormik({
-//     initialValues: {
-//       email: "",
-//       password: "",
-//     },
-//     onSubmit: (values) => {
-//       alert(JSON.stringify(values, null, 2));
-//     },
-//   });
-
-//   return (
-//     <FormComponent onSubmit={formik.handleSubmit}>
-//       <h1>LOGIN FORM</h1>
-//       <label htmlFor="email">Email Address:</label>
-//       <input
-//         id="email"
-//         name="email"
-//         type="email"
-//         onChange={formik.handleChange}
-//         value={formik.values.email}
-//       />
-
-//       <label htmlFor="password">Password:</label>
-//       <input
-//         id="password"
-//         name="password"
-//         type="password"
-//         onChange={formik.handleChange}
-//         value={formik.values.password}
-//       />
-
-//       <SubmitButton type="submit">Submit</SubmitButton>
-//     </FormComponent>
-//   );
-// };
+import * as Yup from "yup";
 
 const LoginForm = () => {
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      email: Yup.string().email("invalid email address").required("required"),
+      password: Yup.string()
+        .min(8, "must be at least 8 characters long")
+        .required("required"),
+    }),
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
+
   return (
-    <Components.Form>
+    <Components.Form noValidate onSubmit={formik.handleSubmit}>
       <Components.Title>Sign in</Components.Title>
-      <Components.Input type="email" placeholder="Email" />
-      <Components.Input type="password" placeholder="Password" />
+      <Components.Input
+        id="email"
+        type="email"
+        {...formik.getFieldProps("email")}
+        placeholder="Email"
+      />
+      {formik.touched.email && formik.errors.email ? (
+        <Components.ErrorMessage>{formik.errors.email}</Components.ErrorMessage>
+      ) : null}
+      <Components.Input
+        id="password"
+        type="password"
+        {...formik.getFieldProps("password")}
+        placeholder="Password"
+      />
+      {formik.touched.password && formik.errors.password ? (
+        <Components.ErrorMessage>
+          {formik.errors.password}
+        </Components.ErrorMessage>
+      ) : null}
       <Components.Anchor href="#">Forgot your password?</Components.Anchor>
       <Components.Button type="submit">Sign in</Components.Button>
     </Components.Form>
