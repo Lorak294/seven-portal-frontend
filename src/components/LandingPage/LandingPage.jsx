@@ -12,7 +12,15 @@ const Container = styled.div`
   justify-content: space-between;
   align-content: center;
   background-image: url(${landingPageImage});
+  background-position: center center;
+  background-repeat: no-repeat;
   background-size: cover;
+
+  @media (orientation: portrait) {
+    flex-direction: column;
+    height: fit-content;
+    text-align: center;
+  }
 `;
 
 const NavbarContainer = styled.div`
@@ -30,6 +38,11 @@ const Left = styled.div`
   justify-content: center;
   align-content: center;
   align-items: center;
+
+  @media (orientation: portrait) {
+    width: 100%;
+    order: 2;
+  }
 `;
 
 const Right = styled.div`
@@ -39,10 +52,16 @@ const Right = styled.div`
   align-content: center;
   flex-direction: column;
   padding: 75px;
+
+  @media (orientation: portrait) {
+    margin-top: 10vh;
+    order: 1;
+    width: 100%;
+  }
 `;
 
 const Title = styled.h1`
-  font-size: 100px;
+  font-size: clamp(60px, 6vw, 100px);
   font-family: "Poppins", sans-serif;
   letter-spacing: 5px;
   color: ${(props) => props.theme.colors.maintext};
@@ -52,9 +71,9 @@ const Title = styled.h1`
 const LandingPage = () => {
   return (
     <>
-      <NavbarContainer>
+      {/* <NavbarContainer>
         <Navbar />
-      </NavbarContainer>
+      </NavbarContainer> */}
 
       <Container>
         <Left>

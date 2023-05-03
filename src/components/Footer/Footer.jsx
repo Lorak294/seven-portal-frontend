@@ -58,8 +58,8 @@ const Footer = () => {
     <>
       <FooterContainer>
         <Column>
-          <h3>Contact</h3>
           <p>Created by Karol Kącki 2023</p>
+          <h3>Contact</h3>
           <IconLink>
             <FaGithub size="2em" />{" "}
             <Link href="https://github.com/Lorak294">github.com/Lorak294</Link>

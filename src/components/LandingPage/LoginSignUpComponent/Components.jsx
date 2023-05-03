@@ -10,6 +10,11 @@ export const Container = styled.div`
   height: 400px;
   max-width: 100%;
   min-width: 400px;
+  margin: 5vw;
+  /* @media (orientation: portrait) {
+    //border-radius: 0;
+    margin: 5vw;
+  } */
 `;
 
 export const SignUpContainer = styled.div`
