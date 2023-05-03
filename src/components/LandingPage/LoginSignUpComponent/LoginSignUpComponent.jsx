@@ -2,17 +2,39 @@ import React, { useState } from "react";
 import * as Components from "./Components";
 import SignupForm from "./SignupForm";
 import LoginForm from "./LoginForm";
+import axios from "axios";
+import { API_URL } from "../../../config";
 
 const LoginSignUpComponent = () => {
   const [signIn, setSignIn] = useState(true);
 
+  const LoginHandler = async (values) => {
+    try {
+      const response = await axios.post(API_URL + "api/Auth/Login", values);
+      console.log(response);
+    } catch (err) {
+      console.log(err.response.data.errors);
+    }
+  };
+
+  const SignupHandler = async (values) => {
+    const LoginHandler = async (values) => {
+      try {
+        const response = await axios.post(API_URL + "api/Auth/Login", values);
+        console.log(response);
+      } catch (err) {
+        console.log(err.response.data.errors);
+      }
+    };
+  };
+
   return (
     <Components.Container>
       <Components.SignUpContainer signIn={signIn}>
-        <SignupForm />
+        <SignupForm signupHandler={SignupHandler} />
       </Components.SignUpContainer>
       <Components.SignInContainer signIn={signIn}>
-        <LoginForm />
+        <LoginForm loginHandler={LoginHandler} />
       </Components.SignInContainer>
 
       <Components.OverlayContainer signIn={signIn}>

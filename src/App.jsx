@@ -2,6 +2,9 @@ import { createGlobalStyle } from "styled-components";
 import { ThemeProvider } from "styled-components";
 import { lightTheme } from "./styling/themes";
 import LandingPage from "./components/LandingPage/LandingPage";
+import { Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Playfair+Display:wght@800&display=swap');
@@ -29,7 +32,13 @@ function App() {
     <>
       <ThemeProvider theme={currTheme}>
         <GlobalStyle />
-        <LandingPage />
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/cards" element={<div>Hello hea are the cards.</div>} />
+          <Route path="/profile/:userId" element={<div>Profile page</div>} />
+        </Routes>
+        <Footer />
       </ThemeProvider>
     </>
   );

@@ -1,14 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import { GiMountaintop } from "react-icons/gi";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
-  width: 100%;
   height: 10%;
   background-color: ${(props) => props.theme.colors.background};
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  z-index: 1000;
 `;
 
 const Left = styled.div`
@@ -34,10 +40,11 @@ const Menu = styled.ul`
   list-style: none;
 `;
 
-const MenuItem = styled.li`
+const LinkItem = styled(Link)`
   font-size: 20px;
   font-weight: bold;
   margin-right: 30px;
+  text-decoration: none;
   color: ${(props) => props.theme.colors.maintext};
   cursor: pointer;
   &:hover {
@@ -45,7 +52,6 @@ const MenuItem = styled.li`
     //color: transparent;
   }
 `;
-
 const Navbar = () => {
   return (
     <Container>
@@ -56,12 +62,22 @@ const Navbar = () => {
       </Left>
       <Center>
         <Menu>
-          <MenuItem>Home</MenuItem>
-          <MenuItem>Definitions</MenuItem>
-          <MenuItem>About</MenuItem>
+          <li>
+            <LinkItem to="/" style={{ textDecoration: "none" }}>
+              Home
+            </LinkItem>
+          </li>
+          <li>
+            <LinkItem to="/cards">Cards</LinkItem>
+          </li>
+          <li>
+            <LinkItem to="/">About</LinkItem>
+          </li>
         </Menu>
       </Center>
-      <Right>RIGHT</Right>
+      <Right>
+        <LinkItem to="/profile/:userId">My Profile</LinkItem>
+      </Right>
     </Container>
   );
 };

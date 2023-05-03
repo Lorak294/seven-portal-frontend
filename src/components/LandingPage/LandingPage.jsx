@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import landingPageImage from "./landingpageImage.jpg";
 import LoginSignUpComponent from "./LoginSignUpComponent/LoginSignUpComponent";
-import Navbar from "../Navbar/Navbar";
-import Footer from "../Footer/Footer";
 
 const Container = styled.div`
   display: flex;
@@ -71,24 +69,15 @@ const Title = styled.h1`
 const LandingPage = () => {
   return (
     <>
-      {/* <NavbarContainer>
-        <Navbar />
-      </NavbarContainer> */}
-
       <Container>
         <Left>
           <LoginSignUpComponent />
         </Left>
         <Right>
           <Title>Welcome to Seven Portal</Title>
-          {/* <Paragraph>
-            Here you can see all the things the 7 boys had acomplished so far.
-            Sign in or create new account to gain access to our dictionary full
-            of memories and countless inside jokes
-          </Paragraph> */}
         </Right>
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
