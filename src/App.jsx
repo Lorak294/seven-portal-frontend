@@ -5,6 +5,7 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+import ProfilePage from "./components/ProfilePage/ProfilePage";
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Playfair+Display:wght@800&display=swap');
@@ -36,7 +37,10 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/cards" element={<div>Hello hea are the cards.</div>} />
-          <Route path="/profile/:userId" element={<div>Profile page</div>} />
+          <Route
+            path="/profile/:userId"
+            element={<ProfilePage></ProfilePage>}
+          />
         </Routes>
         <Footer />
       </ThemeProvider>

@@ -53,6 +53,7 @@ const LinkItem = styled(Link)`
   }
 `;
 const Navbar = () => {
+  const userId = "313";
   return (
     <Container>
       <Left>
@@ -76,7 +77,7 @@ const Navbar = () => {
         </Menu>
       </Center>
       <Right>
-        <LinkItem to="/profile/:userId">My Profile</LinkItem>
+        <LinkItem to={`/profile/${userId}`}>My Profile</LinkItem>
       </Right>
     </Container>
   );
