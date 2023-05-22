@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import * as Components from "./Components";
 import * as Yup from "yup";
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -15,9 +15,7 @@ const LoginForm = () => {
         .min(8, "must be at least 8 characters long")
         .required("required"),
     }),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
+    onSubmit: props.loginHandler,
   });
 
   return (

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import landingPageImage from "./landingpageImage.jpg";
 import LoginSignUpComponent from "./LoginSignUpComponent/LoginSignUpComponent";
-import Navbar from "../Navbar/Navbar";
-import Footer from "../Footer/Footer";
+import PopUp from "../PopUp/PopUp";
+import authService from "../../services/AuthService";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -21,15 +22,6 @@ const Container = styled.div`
     height: fit-content;
     text-align: center;
   }
-`;
-
-const NavbarContainer = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  z-index: 1000;
 `;
 
 const Left = styled.div`
@@ -69,26 +61,61 @@ const Title = styled.h1`
 `;
 
 const LandingPage = () => {
+  const [visiblePopup, setVisiblePopUp] = useState(false);
+  const [popupContent, setPopupContent] = useState({});
+  const navigate = useNavigate();
+  const togglePopup = () => {
+    setVisiblePopUp((prev) => !prev);
+  };
+
+  const SignInHandler = async (values) => {
+    let result = await authService.signIn(values.email, values.password);
+
+    if (result.success) {
+      navigate("/home");
+    }
+
+    setPopupContent(
+      <>
+        <h1>{result.success ? "Success" : "Error"}</h1>
+        <p>{result.message}</p>
+      </>
+    );
+    togglePopup();
+  };
+
+  const SignUpHandler = async (values) => {
+    let result = await authService.signUp(
+      values.username,
+      values.email,
+      values.password
+    );
+    setPopupContent(
+      <>
+        <h1>{result.success ? "Success" : "Error"}</h1>
+        <p>{result.message}</p>
+      </>
+    );
+    togglePopup();
+  };
+
   return (
     <>
-      {/* <NavbarContainer>
-        <Navbar />
-      </NavbarContainer> */}
-
+      <PopUp visible={visiblePopup} toggle={togglePopup}>
+        {popupContent}
+      </PopUp>
       <Container>
         <Left>
-          <LoginSignUpComponent />
+          <LoginSignUpComponent
+            signinHandler={SignInHandler}
+            signupHandler={SignUpHandler}
+          />
         </Left>
         <Right>
           <Title>Welcome to Seven Portal</Title>
-          {/* <Paragraph>
-            Here you can see all the things the 7 boys had acomplished so far.
-            Sign in or create new account to gain access to our dictionary full
-            of memories and countless inside jokes
-          </Paragraph> */}
         </Right>
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

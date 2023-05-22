@@ -2,17 +2,16 @@ import React, { useState } from "react";
 import * as Components from "./Components";
 import SignupForm from "./SignupForm";
 import LoginForm from "./LoginForm";
-
-const LoginSignUpComponent = () => {
+const LoginSignUpComponent = (props) => {
   const [signIn, setSignIn] = useState(true);
 
   return (
     <Components.Container>
       <Components.SignUpContainer signIn={signIn}>
-        <SignupForm />
+        <SignupForm signupHandler={props.signupHandler} />
       </Components.SignUpContainer>
       <Components.SignInContainer signIn={signIn}>
-        <LoginForm />
+        <LoginForm loginHandler={props.signinHandler} />
       </Components.SignInContainer>
 
       <Components.OverlayContainer signIn={signIn}>
