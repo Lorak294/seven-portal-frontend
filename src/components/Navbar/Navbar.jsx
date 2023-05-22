@@ -64,9 +64,7 @@ const Navbar = () => {
       <Center>
         <Menu>
           <li>
-            <LinkItem to="/" style={{ textDecoration: "none" }}>
-              Home
-            </LinkItem>
+            <LinkItem to="/home">Home</LinkItem>
           </li>
           <li>
             <LinkItem to="/cards">Cards</LinkItem>

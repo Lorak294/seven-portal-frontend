@@ -3,8 +3,7 @@ import styled from "styled-components";
 import landingPageImage from "./landingpageImage.jpg";
 import LoginSignUpComponent from "./LoginSignUpComponent/LoginSignUpComponent";
 import PopUp from "../PopUp/PopUp";
-import axios from "axios";
-import { API_URL } from "../../config";
+import authService from "../../services/AuthService";
 
 const Container = styled.div`
   display: flex;
@@ -68,37 +67,36 @@ const LandingPage = () => {
   };
 
   const SignInHandler = async (values) => {
-    try {
-      const response = await axios.post(API_URL + "api/Auth/Login", values);
-      console.log(response);
-    } catch (err) {
-      console.log(err.response.data.errors);
-      setPopupContent({ title: "Error", text: err.response.data.errors });
-      togglePopup();
-    }
+    let result = await authService.signIn(values.email, values.password);
+
+    setPopupContent(
+      <>
+        <h1>{result.success ? "Success" : "Error"}</h1>
+        <p>{result.message}</p>
+      </>
+    );
+    togglePopup();
   };
 
   const SignUpHandler = async (values) => {
-    try {
-      const response = await axios.post(API_URL + "api/Auth/Register", values);
-      console.log(response);
-      setPopupContent({
-        title: "Success",
-        text: "Your account has been successfuly created. Before logging in make sure to confitm Your email address through the message we have just sent to Your inbox.",
-      });
-      togglePopup();
-    } catch (err) {
-      console.log(err.response.data.errors);
-      setPopupContent({ title: "Error", text: err.response.data.errors });
-      togglePopup();
-    }
+    let result = await authService.signUp(
+      values.username,
+      values.email,
+      values.password
+    );
+    setPopupContent(
+      <>
+        <h1>{result.success ? "Success" : "Error"}</h1>
+        <p>{result.message}</p>
+      </>
+    );
+    togglePopup();
   };
 
   return (
     <>
       <PopUp visible={visiblePopup} toggle={togglePopup}>
-        <h1>{popupContent.title}</h1>
-        <p>{popupContent.text}</p>
+        {popupContent}
       </PopUp>
       <Container>
         <Left>
