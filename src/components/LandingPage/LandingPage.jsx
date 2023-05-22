@@ -4,6 +4,7 @@ import landingPageImage from "./landingpageImage.jpg";
 import LoginSignUpComponent from "./LoginSignUpComponent/LoginSignUpComponent";
 import PopUp from "../PopUp/PopUp";
 import authService from "../../services/AuthService";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -62,12 +63,17 @@ const Title = styled.h1`
 const LandingPage = () => {
   const [visiblePopup, setVisiblePopUp] = useState(false);
   const [popupContent, setPopupContent] = useState({});
+  const navigate = useNavigate();
   const togglePopup = () => {
     setVisiblePopUp((prev) => !prev);
   };
 
   const SignInHandler = async (values) => {
     let result = await authService.signIn(values.email, values.password);
+
+    if (result.success) {
+      navigate("/home");
+    }
 
     setPopupContent(
       <>

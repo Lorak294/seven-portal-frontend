@@ -3,7 +3,6 @@ import { ThemeProvider } from "styled-components";
 import { lightTheme } from "./styling/themes";
 import LandingPage from "./components/LandingPage/LandingPage";
 import { Route, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 import HomePage from "./components/HomePage/HomePage";
@@ -16,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
 }
 
 body {
-  background: #f6f5f7;
+  background: #130a02; //#f7f6f5;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -34,7 +33,7 @@ function App() {
     <>
       <ThemeProvider theme={currTheme}>
         <GlobalStyle />
-        <Navbar />
+        {/* <Navbar /> */}
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<HomePage />} />
